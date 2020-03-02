@@ -41,7 +41,35 @@ namespace Exceldata2.Models.Services
                     context.Insert(excel.Excel);
                 }
             }
-           
+             
+        }
+
+        public List<ExcelSheet> GetAllExcelSheetData()
+        {
+                List<ExcelSheet> result = null;
+
+                using (var context = DataContextHelper.GetPPDataContext())
+                {
+                    var sql = PetaPoco.Sql.Builder
+                    .Select("*")
+                    .From("ExcelSheet");
+                    result = context.Fetch<ExcelSheet>(sql).ToList();
+                }
+
+            return result;
+        }
+        public bool DeleteExcelSheetData()
+        {
+            bool result = false;
+
+            using (var context = DataContextHelper.GetPPDataContext())
+            {
+            
+               context.Execute(@"Delete from  ExcelSheet");
+                
+            }
+
+            return true;
         }
     }
 }

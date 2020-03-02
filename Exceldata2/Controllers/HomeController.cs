@@ -68,9 +68,6 @@ namespace Exceldata2.Controllers
                             var noOfCol = item.Dimension.End.Column;
                             var noOfRow = item.Dimension.End.Row;
 
-                            //ExcelSheet excelSheet = new ExcelSheet();
-                            
-                            
                             for (int i = ctr ; i <= noOfRow; i++)
                             {
 
@@ -83,9 +80,9 @@ namespace Exceldata2.Controllers
                                 var col5 = item.Cells[i, 5].Value;
                                 excelSheet.CompanyCode = col1 != null ? col1.ToString() : "";
                                 excelSheet.Company = col2 != null ? col2.ToString() : "";
-                                excelSheet.CurrentOwnership = col3 != null ? col3.ToString() : "";
-                                excelSheet.HighestRate = col4 != null ? col4.ToString() : "";
-                                excelSheet.ForeignStrategicInvestorOwnership = col5 != null ? col5.ToString() : "";
+                                excelSheet.CurrentOwnership = col3 != null ? col3.ToString().Replace("%","") : "";
+                                excelSheet.HighestRate = col4 != null ? col4.ToString().Replace("%", "") : "";
+                                excelSheet.ForeignStrategicInvestorOwnership = col5 != null ? col5.ToString().Replace("%", "") : "";
 
                                 excel.ExcelDataList.Add(excelSheet);
                                 ctr++;
@@ -94,16 +91,26 @@ namespace Exceldata2.Controllers
                         }
                         var list = excel.ExcelDataList.ToList();
                         string Message = string.Empty;
+                        bool Isempty = false;
                         try
                         {
                            
                             if (list != null)
                             {
-                                ExcelService.Instance.AddExcelSheet(list);
+                                var isDataExist = ExcelService.Instance.GetAllExcelSheetData();
+                                if (isDataExist.Count() > 0)
+                                {
+                                    Isempty =  ExcelService.Instance.DeleteExcelSheetData();
+                                }
+                                if (Isempty)
+                                {
+                                    ExcelService.Instance.AddExcelSheet(list);
+                                }
                             }
                             else
                             {
                                 Message = "Model is Empty !";
+
                             }
                         }
                         catch (Exception ex)
