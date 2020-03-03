@@ -149,7 +149,7 @@ namespace ExcelData.DataServcies
 
 
 
-		[Column] public string CompanyCode { get; set; }
+		[Column] public string StockSymbol { get; set; }
 
 
 
@@ -161,25 +161,13 @@ namespace ExcelData.DataServcies
 
 
 
-		[Column] public string CurrentOwnerShip { get; set; }
+		[Column] public string CurrentPercentage { get; set; }
 
 
 
 
 
 		[Column] public DateTime? Date { get; set; }
-
-
-
-
-
-		[Column] public string ForeignStrategicInvestorOwnership { get; set; }
-
-
-
-
-
-		[Column] public string HighestRate { get; set; }
 
 
 

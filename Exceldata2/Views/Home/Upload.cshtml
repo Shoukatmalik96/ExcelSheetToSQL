@@ -7,12 +7,31 @@
 
 
 
-    <h3>Import data from multiple sheet! </h3>
+    <h4><bold>Excel Sheet Data Import </bold> </h4>
     <hr>
 
     <div class="form-group">
-        <input type="file" name="UploadedFile" placeholder="Import Excel file here !" class="form-control" />
+        <label for="exampleInputEmail1">Sheet Year </label>
+        <input type="text" class="form-control" name="year" placeholder=" Required for Arabic date format">
     </div>
-    <input type="submit" name="Submit" value="Submit" class="btn btn-success" />
+    <div class="form-group">
+        <label for="exampleInputPassword1">Select Excel Sheet</label>
+        <input type="file" name="UploadedFile" class="form-control" />
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="arabicDate" name="arabicDate">
+        <label class="form-check-label" for="exampleCheck1">Arabic Date Format</label>
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="twoColumnFormat" name="twoColumnFormat">
+        <label class="form-check-label" for="exampleCheck1">Two column Excel Sheet</label>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
 
 }
+
+
+
+
+@*<form>
+    </form>*@
