@@ -17,14 +17,12 @@ namespace Exceldata2.Controllers
 		{
 			return View();
 		}
-
 		public ActionResult About()
 		{
 			ViewBag.Message = "Your application description page.";
 
 			return View();
 		}
-
 		public ActionResult Contact()
 		{
 			ViewBag.Message = "Your contact page.";
@@ -45,7 +43,7 @@ namespace Exceldata2.Controllers
             {
                 HttpPostedFileBase file = Request.Files["UploadedFile"];
       
-                //check the sheet excel sheet format and date format of the excel sheet
+                //check  sheet column and date format.
                 bool isArabicDateFormat = (formCollection["arabicDate"] != null && formCollection["arabicDate"] == "on");
                 bool isTwoColumnSheet = (formCollection["twoColumnFormat"] != null && formCollection["twoColumnFormat"] == "on");
                 string year = formCollection["year"];
