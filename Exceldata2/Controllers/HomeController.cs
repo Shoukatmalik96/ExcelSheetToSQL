@@ -130,7 +130,7 @@ namespace Exceldata2.Controllers
                                     }
                                   var col1 = item.Cells[i, 1].Value;
                                   var col2 = item.Cells[i, 2].Value;
-                                  var col3 = item.Cells[i, 3].Value;
+                                  var col3 = item.Cells[i, 4].Value;
                                   excelSheet.StockSymbol = col1 != null ? col1.ToString() : "";
                                   excelSheet.Company = col2 != null ? col2.ToString() : "";
                                   excelSheet.CurrentPercentage = col3 != null ? col3.ToString().Replace("%", "") : "";
@@ -154,7 +154,7 @@ namespace Exceldata2.Controllers
                                 //if (Isempty)
                                 //{
                                 //    ExcelService.Instance.AddExcelSheet(list);
-                                //}
+                                //}V
                             }
                             else
                             {
@@ -171,5 +171,11 @@ namespace Exceldata2.Controllers
             }
             return View("Index");
         }
+         public Boolean IsNumber(String value)
+    {
+        return value.All(Char.IsDigit);
     }
+    }
+   
 }
+
