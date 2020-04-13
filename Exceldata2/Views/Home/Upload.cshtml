@@ -1,29 +1,35 @@
 ﻿@{
-    ViewBag.Title = "upload view";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+				/**/
+
+				ViewBag.Title = "upload view";
+				Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
 
-    <h4><bold>Excel Sheet Data Import </bold> </h4>
-    <hr>
+	<h4><bold>Excel Sheet Data Import </bold> </h4>
+	<hr>
 
-    <div class="form-group">
-        <label for="exampleInputEmail1">Sheet Year </label>
-        <input type="text" class="form-control" name="year" placeholder=" Required for Arabic date format">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Select Excel Sheet</label>
-        <input type="file" name="UploadedFile" class="form-control" />
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="arabicDate" name="arabicDate">
-        <label class="form-check-label" for="exampleCheck1">Arabic Date Format</label>
-    </div>
-    <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="twoColumnFormat" name="twoColumnFormat">
-        <label class="form-check-label" for="exampleCheck1">Two column Excel Sheet</label>
-    </div>
-    <button type="submit" class="btn btn-success">Submit</button>
+	<div class="form-group">
+		<label for="exampleInputEmail1">Sheet Year </label>
+		<input type="text" class="form-control" name="year" placeholder=" Required for Arabic date format">
+	</div>
+	<div class="form-group">
+		<label for="exampleInputPassword1">Select Excel Sheet</label>
+		<input type="file" name="UploadedFile" class="form-control" />
+	</div>
+	<div class="form-check">
+		<input type="checkbox" class="form-check-input" id="arabicDate" name="arabicDate">
+		<label class="form-check-label" for="exampleCheck1">Arabic Date Format</label>
+	</div>
+	<div class="form-check">
+		<input type="checkbox" class="form-check-input" id="twoColumnFormat" name="twoColumnFormat">
+		<label class="form-check-label" for="exampleCheck1">Two column Excel Sheet</label>
+	</div>
+	<div class="form-check">
+		<input type="checkbox" class="form-check-input" id="isThreeColumnSheet" name="isThreeColumnSheet">
+		<label class="form-check-label" for="exampleCheck1">Three column Excel Sheet</label>
+	</div>
+	<button type="submit" class="btn btn-success">Submit</button>
 
 }

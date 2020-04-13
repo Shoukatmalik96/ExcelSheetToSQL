@@ -46,6 +46,7 @@ namespace Exceldata2.Controllers
                 //check  sheet column and date format.
                 bool isArabicDateFormat = (formCollection["arabicDate"] != null && formCollection["arabicDate"] == "on");
                 bool isTwoColumnSheet = (formCollection["twoColumnFormat"] != null && formCollection["twoColumnFormat"] == "on");
+                bool isThreeColumnSheet = (formCollection["isThreeColumnSheet"] != null && formCollection["isThreeColumnSheet"] == "on");
                 string year = formCollection["year"];
                 if (file != null && !string.IsNullOrEmpty(file.FileName))
                 {
@@ -105,7 +106,53 @@ namespace Exceldata2.Controllers
                                   ctr++;
                                 }
                             }
-                            else
+							else if (isThreeColumnSheet)
+							{
+				
+								int ctr = 3;
+
+								for (int i = ctr; i <= noOfRow; i++)
+								{
+									ExcelSheet excelSheet = new ExcelSheet();
+									if (isArabicDateFormat)
+									{
+										var date = DateTimeHelper.GetArabicDate(item.Name, year);
+										excelSheet.Date = DateTime.ParseExact(date, "d-M-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+									}
+									else
+									{
+										var day = DateTimeHelper.GetDayMonthFromCurrentDate(item.Name, true, false);
+										var month = DateTimeHelper.GetDayMonthFromCurrentDate(item.Name, false, true);
+
+										if (day.Length < 2 && month.Length < 2)
+										{
+											excelSheet.Date = DateTime.ParseExact(item.Name, "d-M-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+										}
+										else if (day.Length == 2 && month.Length < 2)
+										{
+											excelSheet.Date = DateTime.ParseExact(item.Name, "dd-M-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+										}
+										else if (day.Length < 2 && month.Length == 2)
+										{
+											excelSheet.Date = DateTime.ParseExact(item.Name, "d-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+										}
+										else
+										{
+											excelSheet.Date = DateTime.ParseExact(item.Name, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+										}
+									}
+									// excel sheet rows and columns
+									var col1 = item.Cells[i, 1].Value;
+									var col2 = item.Cells[i, 2].Value;
+									var col3 = item.Cells[i, 3].Value;
+									excelSheet.StockSymbol = col1 != null ? col1.ToString().Trim() :"";
+									excelSheet.Company = col2 != null ? col2.ToString().Trim() :"";
+									excelSheet.CurrentPercentage = col3!= null ? col3.ToString().Replace("%","").Trim() :"";
+									excel.ExcelDataList.Add(excelSheet);
+									ctr++;
+								}
+							}
+							else
                             {
                                 int ctr = 3;
                                 for (int i = ctr; i <= noOfRow; i++)
