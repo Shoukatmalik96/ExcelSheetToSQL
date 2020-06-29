@@ -2,6 +2,7 @@
 using Exceldata2.Models;
 using Exceldata2.Models.Services;
 using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,7 +101,17 @@ namespace Exceldata2.Controllers
                                   // excel sheet rows and columns
                                   var col1 = item.Cells[i, 1].Value;
                                   var col2 = item.Cells[i, 2].Value;
+                                  bool isPercentage = col2.IsNumeric();
                                   excelSheet.Company = col1 != null ? col1.ToString() : "";
+                                  if (isPercentage)
+                                  {
+                                      double col3 = (double)col2 * 100;
+                                      excelSheet.CurrentPercentage = col3.ToString();
+                                  }
+                                  else
+                                  {
+                                      excelSheet.CurrentPercentage = col2 != null ? col2.ToString().Replace("%", "") : "";
+                                  } 
                                   excelSheet.CurrentPercentage = col2 != null ? col2.ToString().Replace("%", "") : "";
                                   excel.ExcelDataList.Add(excelSheet);
                                   ctr++;
@@ -147,7 +158,16 @@ namespace Exceldata2.Controllers
 									var col3 = item.Cells[i, 3].Value;
 									excelSheet.StockSymbol = col1 != null ? col1.ToString().Trim() :"";
 									excelSheet.Company = col2 != null ? col2.ToString().Trim() :"";
-									excelSheet.CurrentPercentage = col3!= null ? col3.ToString().Replace("%","").Trim() :"";
+                                    bool isPercentage = col3.IsNumeric();
+                                    if (isPercentage)
+                                    {
+                                        double col4 = (double)col3 * 100;
+                                        excelSheet.CurrentPercentage = col4.ToString();
+                                    }
+                                    else
+                                    {
+                                        excelSheet.CurrentPercentage = col3 != null ? col2.ToString().Replace("%", "") : "";
+                                    }
 									excel.ExcelDataList.Add(excelSheet);
 									ctr++;
 								}
@@ -180,7 +200,16 @@ namespace Exceldata2.Controllers
                                   var col3 = item.Cells[i, 4].Value;
                                   excelSheet.StockSymbol = col1 != null ? col1.ToString() : "";
                                   excelSheet.Company = col2 != null ? col2.ToString() : "";
-                                  excelSheet.CurrentPercentage = col3 != null ? col3.ToString().Replace("%", "") : "";
+                                  bool isPercentage = col3.IsNumeric();
+                                  if (isPercentage)
+                                  {
+                                      double col4 = (double)col3 * 100;
+                                      excelSheet.CurrentPercentage = col4.ToString();
+                                  }
+                                  else
+                                  {
+                                      excelSheet.CurrentPercentage = col3 != null ? col2.ToString().Replace("%", "") : "";
+                                  }
                                   excel.ExcelDataList.Add(excelSheet);
                                   ctr++;
                                 }
