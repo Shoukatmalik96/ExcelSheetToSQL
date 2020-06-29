@@ -1,0 +1,13 @@
+GO
+/****** Object:  Table [dbo].[ExcelSheet4]    Script Date: 29/06/2020 4:03:34 pm ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ExcelSheet](
+	[StockSymbol] [nvarchar](255) NULL,
+	[Company] [nvarchar](255) NULL,
+	[CurrentPercentage] [nvarchar](255) NULL,
+	[Date] [datetime] NULL
+) ON [PRIMARY]
+GO
